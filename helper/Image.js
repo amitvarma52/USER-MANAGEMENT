@@ -1,22 +1,20 @@
-import multer from "multer";
-import path from "path";
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+
+// Ensure the uploads directory exists
+const uploadsDir = './uploads/';
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
 
 // Set storage engine
 const storage = multer.diskStorage({
-    destination: './uploads/',
+    destination: uploadsDir,
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-
-// Initialize upload
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 1000000 }, // Limit file size to 1MB
-    fileFilter: function (req, file, cb) {
-        checkFileType(file, cb);
-    }
-}).single('image'); // 'image' is the field name in the form
 
 // Check file type
 function checkFileType(file, cb) {
@@ -30,5 +28,14 @@ function checkFileType(file, cb) {
         cb('Error: Images Only!');
     }
 }
+
+// Initialize upload
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1000000 }, // Limit file size to 1MB
+    fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+}).single('image'); // 'image' is the field name in the form
 
 export default upload;

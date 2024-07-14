@@ -1,47 +1,64 @@
-import React, { useEffect, useState } from 'react'
+/** @format */
+
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserInformation = () => {
-  const [load,setLoad]=useState(false)
-  
-  const [data,setData]=useState()
-  useEffect(()=>{
-    setLoad(true)
-    fetch("http://localhost:8000/api/v1/user/data/allUsers")
-    .then(res=>res.json())
-    .then(resData=>{
-      setLoad(false)
-      setData(resData)
-    })
-  },[])
-  if(!data){
-    return <h1>no user</h1>
-  }
+  const {userData}= useSelector(state => state.users);
+  console.log(userData);
+  // const [load, setLoad] = useState(false);
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   setLoad(true);
+  //   axios.get("http://localhost:8000/api/v1/user/data/allUsers")
+  //     .then(response => {
+  //       setLoad(false);
+  //       setData(response.data);
+  //       console.log(response.data); // Log the fetched data for debugging
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching data:", error);
+  //       setLoad(false);
+  //     });
+  // }, []);
+
+  // if (load) {
+  //   return <h1>Loading...</h1>;
+  // }
+
+  // if (!data || data.length === 0) {
+  //   return <h1>No users found</h1>;
+  // }
+
   return (
     <>
-    {load==true && <h1>Loading</h1>}
-    {load==false && <div>
       <h1>ALL USERS</h1>
-  <div className='flex'>
-    {data.map((element)=>{
-      return <div class="container" key={element._id}>
- <div class="wrapper">
-  <img src={element.image}  alt='error'/>
-   <h1>{element.name} {element.last_name} </h1>
-  </div>
-  <div class="button-wrapper"> 
-  <button class="btn outline">{element.email}</button>
-    <button class="btn fill">{element.phone}</button>
-  </div>
-  <div className='edit-btn'>
-    
-  </div>
-    </div> 
-    })}
-    </div>
-      </div>}
-    
+      {/* <div className="flex">
+        {data.map((element) => (
+          <div className="container" key={element._id}>
+            <div className="wrapper">
+              {element.image ? (
+                <img
+                  src={element.image}
+                  alt={`${element.name} ${element.last_name}`}
+                />
+              ) : (
+                <div>No Image Available</div>
+              )}
+              <h2>
+                {element.name} {element.last_name}
+              </h2>
+            </div>
+            <div className="button-wrapper">
+              <button className="btn outline">{element.email}</button>
+              <button className="btn fill">{element.phone}</button>
+            </div>
+          </div>
+        ))}
+      </div> */}
     </>
-  )
-}
+  );
+};
 
-export default UserInformation
+export default UserInformation;

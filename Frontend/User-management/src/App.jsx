@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import RegisterForm from './components/RegisterForm'
-import UserInformation from './components/UserInformation'
-import ShowBtn from './components/ShowBtn'
+/** @format */
+
+import { useState } from "react";
+import "./App.css";
+import RegisterForm from "./components/RegisterForm";
+import UserInformation from "./components/UserInformation";
+import ShowBtn from "./components/ShowBtn";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const [showInfo,setShowInfo]=useState(true)
   return (
     <>
-    <ShowBtn showInfo={showInfo} setShowInfo={setShowInfo}/>
-    {showInfo==true ?<UserInformation setShowInfo={setShowInfo}/>:<RegisterForm setShowInfo={setShowInfo}/>}
+      <ShowBtn />
+      <Outlet/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/user/Register/NewUser', registerUser);``             //working    
 
 // get all
-router.get('/user/data/allUsers',getAllUser);                      //working
+router.post('/user/data/allUsers',getAllUser);                      //working
 
 // get by id
 router.get('/user/UserByID/:id',getUserByID);                      //working
