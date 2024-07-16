@@ -5,7 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
-  const navigate=useNavigate()
+  const { handleLogin, adminInfo } = useContext(context);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     last_name: "",
@@ -72,7 +73,7 @@ const RegisterForm = () => {
   return (
     <>
       <div className="container">
-        <h2>Register</h2>
+        <h2>New User</h2>
         {message && <p>{message}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-data">
