@@ -19,7 +19,7 @@ const ShowBtn = () => {
   } else {
     return (
       <div className="show-btn">
-        <Link className="show" to={"/adminLogin"}>
+        <Link className="show" to={"/"}>
           Admin Login
         </Link>
       </div>

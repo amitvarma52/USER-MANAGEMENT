@@ -9,7 +9,7 @@ const AdminLogin = () => {
   const adminPass = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(adminName.current.value,adminPass.current.value,)
+    handleLogin(adminName.current.value,adminPass.current.value)
     adminName.current.value='';
     adminPass.current.value='';
   };

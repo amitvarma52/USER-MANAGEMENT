@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { context } from "../Store/Store";
 
 const RegisterForm = () => {
   const { handleLogin, adminInfo } = useContext(context);
-  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     name: "",
     last_name: "",
@@ -19,6 +20,7 @@ const RegisterForm = () => {
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
+    e.preventDefault();
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -26,6 +28,7 @@ const RegisterForm = () => {
   };
 
   const handleImageChange = (e) => {
+    e.preventDefault();
     setImage(e.target.files[0]);
   };
 
@@ -53,7 +56,6 @@ const RegisterForm = () => {
           },
         }
       );
-      console.log(response.data);
       setFormData({
         name: "",
         last_name: "",
@@ -61,9 +63,10 @@ const RegisterForm = () => {
         phone: "",
         password: "",
       });
-      setImage(null); // Clear the image state after successful submit
+      setImage(null);
       setMessage("User registered successfully!");
-      // navigate('/allUser')
+      console.log(adminInfo)
+      handleLogin(adminInfo.adminName,adminInfo.adminPass)
     } catch (error) {
       console.error("Failed to register user", error);
       setMessage("Failed to register user");

@@ -12,7 +12,7 @@ const Store = ({ children }) => {
     showOther: false,
     userData: [],
   });
-  const handleLogin = (adminName, adminPass) => {
+  const handleLogin = (adminName=adminInfo.adminName, adminPass=adminInfo.adminPass) => {
     console.log(adminName,adminPass)
     fetch("http://localhost:8000/api/v1/user/data/allUsers", {
       method: "POST",
@@ -47,7 +47,7 @@ const Store = ({ children }) => {
   };
   return (
     <>
-      <context.Provider value={{ obj, handleLogin,adminInfo }}>
+      <context.Provider value={{ obj, setObj,handleLogin,adminInfo }}>
         {children}
       </context.Provider>
     </>

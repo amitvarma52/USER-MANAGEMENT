@@ -5,10 +5,6 @@ import { context } from "../Store/Store";
 
 const UserInformation = () => {
   const { obj } = useContext(context);
-  useEffect(() => {
-    console.log(obj.userData);
-  }, [obj]);
-
   if (!obj.userData || obj.userData.length === 0) {
     return <h1>No users found</h1>;
   }
